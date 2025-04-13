@@ -1,0 +1,321 @@
+import React, { useState } from 'react';
+import { GridDeleteForeverIcon } from '@mui/x-data-grid';
+import { Box, Button, TextField, Typography, Chip,IconButton } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setAboutPageDetailsAction, setFacilitiesDetailsAction } from '../redux/HomePage/action';
+
+const EditableAboutPage = () => {
+    const dispatch = useDispatch();
+    const [fileNames, setFileNames] = useState({});
+    const [timingValue, setTimingValue] = useState('');
+    const [timingList, setTimingList] = useState([]);
+  
+    const handleFileChange = (e) => {
+      const { name } = e.target;
+      const file = e.target.files[0];
+      if (file) {
+        setFileNames((prev) => ({ ...prev, [name]: file.name }));
+      }
+    };
+  
+    const handleTimingAdd = () => {
+      if (timingValue.trim()) {
+        setTimingList([...timingList, timingValue.trim()]);
+        setTimingValue('');
+      }
+    };
+  
+    const handleTimingDelete = (index) => {
+      setTimingList(timingList.filter((_, i) => i !== index));
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+  
+      timingList.forEach((time) => formData.append('Timing[]', time));
+  
+      dispatch(setAboutPageDetailsAction(formData, dispatch));
+    };
+
+        const [facilities, setFacilities] = useState([
+          { titles: '', descriptions: '', links: '', iconFile: null, iconFileName: '' }
+        ]);
+      
+        const handleInputChange = (index, field, value) => {
+          const updated = [...facilities];
+          updated[index][field] = value;
+          setFacilities(updated);
+        };
+      
+        const handleFileChange2 = (index, file) => {
+          const updated = [...facilities];
+          updated[index].iconFile = file;
+          updated[index].iconFileName = file?.name || '';
+          setFacilities(updated);
+        };
+      
+        const handleAddFacility = () => {
+          setFacilities([
+            ...facilities,
+            { titles: '', descriptions: '', links: '', iconFile: null, iconFileName: '' }
+          ]);
+        };
+      
+        const handleRemoveFacility = (index) => {
+          const updated = [...facilities];
+          updated.splice(index, 1);
+          setFacilities(updated);
+        };
+      
+        const handleSubmit2 = (e) => {
+          e.preventDefault();
+          const formData = new FormData();
+      
+          facilities.forEach((item, index) => {
+            formData.append('titles', item?.titles);
+            formData.append('descriptions', item?.descriptions);
+            formData.append('links', item?.links);
+                formData.append('icons', item?.iconFile);
+          });
+          dispatch(setFacilitiesDetailsAction(formData, dispatch));
+        };
+  return (
+    <>
+        <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        width: '100%',
+        maxWidth: 700,
+        bgcolor: 'background.paper',
+        p: 4,
+        borderRadius: 2,
+        boxShadow: 3,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+      }}
+    >
+      <Typography variant="h6" fontWeight={600} color="primary">
+        About Section
+      </Typography>
+
+      <TextField
+        label="Banner Text"
+        name="bannertext"
+        placeholder="Enter banner text"
+        fullWidth
+        required
+      />
+
+      <TextField
+        label="Title"
+        name="title"
+        placeholder="Enter title"
+        fullWidth
+        required
+      />
+
+      <TextField
+        label="Description"
+        name="description"
+        placeholder="Enter description"
+        fullWidth
+        multiline
+        rows={3}
+        required
+      />
+
+      <Box>
+        <Button variant="outlined" component="label">
+          Upload Big Image
+          <input
+            type="file"
+            name="bigImage"
+            hidden
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+        </Button>
+        {fileNames.bigImage && (
+          <Typography variant="body2" mt={1} color="text.secondary">
+            Selected file: <strong>{fileNames.bigImage}</strong>
+          </Typography>
+        )}
+      </Box>
+
+      <Box>
+        <Button variant="outlined" component="label">
+          Upload Small Image
+          <input
+            type="file"
+            name="smallImage"
+            hidden
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+        </Button>
+        {fileNames.smallImage && (
+          <Typography variant="body2" mt={1} color="text.secondary">
+            Selected file: <strong>{fileNames.smallImage}</strong>
+          </Typography>
+        )}
+      </Box>
+
+      <Box>
+        <Button variant="outlined" component="label">
+          Banner Image
+          <input
+            type="file"
+            name="bannerImage"
+            hidden
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+        </Button>
+        {fileNames.bannerImage && (
+          <Typography variant="body2" mt={1} color="text.secondary">
+            Selected file: <strong>{fileNames.bannerImage}</strong>
+          </Typography>
+        )}
+      </Box>
+      <Box >
+        <Typography variant="subtitle2" color="text.secondary">
+          Add Timing (e.g. Mon - Fri 10AM to 6PM):
+        </Typography>
+        <Box display="flex" gap={1} mt={1}>
+          <TextField
+            label="Timing"
+            value={timingValue}
+            onChange={(e) =>{
+              setTimingValue(e.target.value)}
+            } 
+            fullWidth
+          />
+          <Button onClick={handleTimingAdd} variant="contained">
+            Add
+          </Button>
+        </Box>
+        <Box mt={1} display="flex" gap={1} flexWrap="wrap">
+          {timingList.map((time, index) => (
+            <Chip
+              key={index}
+              label={time}
+              onDelete={() => handleTimingDelete(index)}
+              color="primary"
+              variant="outlined"
+            />
+          ))}
+        </Box>
+      </Box>
+
+      <Box display="flex" justifyContent="flex-end" gap={2}>
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </Box>
+    </Box>
+
+     <Box
+          component="form"
+          onSubmit={handleSubmit2}
+          sx={{
+            width: '100%',
+            maxWidth: 700,
+            bgcolor: 'background.paper',
+            p: 4,
+            borderRadius: 2,
+            boxShadow: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 3,
+             mt: 2           }}
+        >
+          <Typography variant="h6" fontWeight={600} color="primary">
+            Add Facilities
+          </Typography>
+    
+          {facilities.map((facility, index) => (
+            <Box
+              key={index}
+              sx={{
+                border: '1px solid #ccc',
+                borderRadius: 2,
+                p: 2,
+                position: 'relative',
+              }}
+            >
+               <IconButton
+                onClick={() => handleRemoveFacility(index)}
+                sx={{justifyContent:'end',width:'100%',":hover":{backgroundColor:'white  !important'}}}
+            
+                color="error"
+                disabled={facilities.length === 1}
+              >
+                <GridDeleteForeverIcon />
+              </IconButton>
+    
+    
+              <TextField
+                label="Title"
+                value={facility.titles}
+                onChange={(e) => handleInputChange(index, 'titles', e.target.value)}
+                name='titles'
+                fullWidth
+                required
+                sx={{ mb: 2 }}
+              />
+    
+              <TextField
+                label="Description"
+                value={facility.descriptions}
+                onChange={(e) => handleInputChange(index, 'descriptions', e.target.value)}
+                name='descriptions'
+                fullWidth
+                multiline
+                rows={2}
+                required
+                sx={{ mb: 2 }}
+              />
+    
+              <TextField
+                label="Link"
+                value={facility.links}
+                onChange={(e) => handleInputChange(index, 'links', e.target.value)}
+                name='links'
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+    
+              <Button variant="outlined" component="label">
+                Upload Icon
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) => handleFileChange2(index, e.target.files[0])}
+                />
+              </Button>
+              {facility.iconFileName && (
+                <Typography variant="body2" mt={1} color="text.secondary">
+                  Selected file: <strong>{facility.iconFileName}</strong>
+                </Typography>
+              )}
+            </Box>
+          ))}
+    
+          <Box display="flex" justifyContent="space-between">
+            <Button variant="outlined" onClick={handleAddFacility}>
+              Add Another Facility
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+          </Box>
+        </Box>
+    </>
+  )
+}
+
+export default EditableAboutPage
