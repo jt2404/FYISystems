@@ -5,9 +5,11 @@ import { Box, TextField, Button, Typography, IconButton } from '@mui/material';
 // import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from 'react-redux';
 import { setContactPageDetailsAction } from '../redux/HomePage/action';
+import CustomSnackbar from './CustomSnackbar';
 
 const EditableContactPage = () => {
     const dispatch = useDispatch();
+  const [alertOpen, setAlertOpen] = useState(false);
 
     const [form, setForm] = useState({
       title: '',
@@ -43,10 +45,19 @@ const EditableContactPage = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(setContactPageDetailsAction(form, dispatch));
+      setAlertOpen(false);
+      setContactPageDetailsAction(form, dispatch).then(() => {
+        setAlertOpen(true);
+      });
     };
   return (
     <>
+    <CustomSnackbar
+            open={alertOpen}
+            message="Updated successfully!"
+            severity="success"
+            onClose={() => setAlertOpen(false)}
+          />
         <Box
       component="form"
       onSubmit={handleSubmit}

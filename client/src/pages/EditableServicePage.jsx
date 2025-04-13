@@ -5,11 +5,14 @@ import { Box, TextField, Button, Typography, Stack, IconButton } from '@mui/mate
 // import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch } from 'react-redux';
 import { setServicePageDetailsAction } from '../redux/HomePage/action';
+import CustomSnackbar from './CustomSnackbar';
 
 
 const EditableServicePage = () => {
 
     const dispatch = useDispatch()
+      const [alertOpen, setAlertOpen] = useState(false);
+    
     const [services, setServices] = useState([
         { titles: '', descriptions: '', imageUrl: '', links: '' },
       ]);
@@ -44,7 +47,7 @@ const EditableServicePage = () => {
     
       const handleSubmit = async (e, service) => {
         e.preventDefault();
-      
+        setAlertOpen(false);
         const formData = new FormData(e.target);
         const data = {
           title: formData.get('title'),
@@ -57,11 +60,19 @@ const EditableServicePage = () => {
         // if (bannerImage && bannerImage.name) {
         //   data.bannerImage = bannerImage; // append only if image is uploaded
         // }
-         dispatch(setServicePageDetailsAction(formData, dispatch))
+         setServicePageDetailsAction(formData, dispatch).then(() => {
+          setAlertOpen(true);
+        });
         
       };
   return (
     <>
+    <CustomSnackbar
+            open={alertOpen}
+            message="Updated successfully!"
+            severity="success"
+            onClose={() => setAlertOpen(false)}
+          />
      <Box
         component="form"
         onSubmit={(e) => handleSubmit(e, services)}

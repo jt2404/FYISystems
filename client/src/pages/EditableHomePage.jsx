@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box,TextField, Button, Typography, Stack } from '@mui/material';
 import { setHomeMarqueeDetailsAction, setHomePageDetailsAction } from '../redux/HomePage/action';
+import CustomSnackbar from './CustomSnackbar';
 
 
 const EditableHomePage = () => {
 
     const dispatch = useDispatch();
       const [fileName, setFileName] = useState("");
+      const [alertOpen, setAlertOpen] = useState(false);
     
       const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -17,24 +19,35 @@ const EditableHomePage = () => {
       // const { themeStretch } = useSettingsContext();
       const handleSubmit = (e) => {
         e.preventDefault();
+        setAlertOpen(false);
         const formData = new FormData(e.target);
         
-        dispatch(setHomePageDetailsAction(formData,dispatch))
+        setHomePageDetailsAction(formData,dispatch).then(() => {
+          setAlertOpen(true);
+        });
       };
 
       const [text, setText] = useState('');
 
   const handleSubmit2 = (e) => {
     e.preventDefault();
-
+    setAlertOpen(false);
     const formData = new FormData();
     formData.append('marqueeText', text);
 
-    dispatch(setHomeMarqueeDetailsAction(formData, dispatch));
+    setHomeMarqueeDetailsAction(formData, dispatch).then(() => {
+      setAlertOpen(true);
+    });
   };
 
   return (
     <>
+    <CustomSnackbar
+            open={alertOpen}
+            message="Updated successfully!"
+            severity="success"
+            onClose={() => setAlertOpen(false)}
+          />
       <Box
         component="form"
         onSubmit={handleSubmit}
