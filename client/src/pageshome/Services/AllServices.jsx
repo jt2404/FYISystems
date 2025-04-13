@@ -20,9 +20,9 @@ const AllServices = () => {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
           <a href="service-details.html" className="service-card style-two">
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[0]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[0]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[0]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[0]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">
@@ -78,9 +78,9 @@ const AllServices = () => {
           </a>
           <a href="service-details.html" className="service-card style-two">
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[1]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[1]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[1]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[1]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">
@@ -135,9 +135,9 @@ const AllServices = () => {
           </a>
           <a href="service-details.html" className="service-card style-two">
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[2]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[2]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[2]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[2]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">
@@ -192,9 +192,9 @@ const AllServices = () => {
           </a>
           <a href="service-details.html" className="service-card style-two">
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[3]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[3]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[3]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[3]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">
@@ -252,9 +252,9 @@ const AllServices = () => {
             className="service-card style-two mb-10"
           >
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[4]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[4]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[4]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[4]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">
@@ -309,9 +309,9 @@ const AllServices = () => {
           </a>
           <a href="service-details.html" className="service-card style-two">
             <div className="service-thumb">
-              <img src={`http://localhost:5000${homePage?.servicesSection?.services[5]?.imageUrl}`} alt="..." />
+              <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[5]?.imageUrl}`} alt="..." />
               <div className="overlay-image">
-                <img src={`http://localhost:5000${homePage?.servicesSection?.services[5]?.imageUrl}`} alt="..." />
+                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.servicesSection?.services[5]?.imageUrl}`} alt="..." />
               </div>
             </div>
             <div className="service-info">

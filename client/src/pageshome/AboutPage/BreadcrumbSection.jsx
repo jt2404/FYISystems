@@ -8,7 +8,7 @@ const BreadcrumbSection = () => {
   return (
     <section className="ak-about-hero-1">
       <img
-        src={`http://localhost:5000${homePage?.aboutSection?.bannerUrl}`}
+        src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.aboutSection?.bannerUrl}`}
         className="about-hero-bg ak-bg object-cover"
         alt="..."
         data-swiper-parallax="1152"

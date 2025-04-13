@@ -16,8 +16,8 @@ const About = () => {
           {/* Image Section */}
           {/* eslint-disable */}
           <div className="image-content">
-            <img className="about-img-1"  src={`http://localhost:5000${homePage?.aboutSection?.bigImageUrl}`} alt="About 1" />
-            <img className="about-img-2"  src={`http://localhost:5000${homePage?.aboutSection?.smallImageUrl}`} alt="About 2" />
+            <img className="about-img-1"  src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.aboutSection?.bigImageUrl}`} alt="About 1" />
+            <img className="about-img-2"  src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.aboutSection?.smallImageUrl}`} alt="About 2" />
           </div>
 
           {/* Info Section */}
