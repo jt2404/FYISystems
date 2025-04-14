@@ -14,7 +14,7 @@ const AppointmentStatusChart = () => {
   const [financeData, setfinanceData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/landingPage/status-count')
+    axios.get('http://3.128.53.252:3001/api/landingPage/status-count')
       .then((res) => {
         const formattedData = res.data.map((item) => ({
           name: item._id.charAt(0).toUpperCase() + item._id.slice(1),
@@ -30,7 +30,7 @@ const AppointmentStatusChart = () => {
       });
   }, []);
   useEffect(() => {
-    axios.get('http://localhost:5000/api/landingPage/finance-count')
+    axios.get('http://3.128.53.252:3001/api/landingPage/finance-count')
       .then((res) => {
         setfinanceData(res.data);
       })
