@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GridDeleteForeverIcon } from '@mui/x-data-grid';
 import { Box, TextField, Button, Typography, IconButton } from '@mui/material';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import AddIcon from '@mui/icons-material/Add';
-import { useDispatch } from 'react-redux';
-import { setContactPageDetailsAction } from '../redux/HomePage/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHomePageDetailsAction, setContactPageDetailsAction } from '../redux/HomePage/action';
 import CustomSnackbar from './CustomSnackbar';
 
 const EditableContactPage = () => {
     const dispatch = useDispatch();
   const [alertOpen, setAlertOpen] = useState(false);
+  const {homePage} = useSelector((state) => state.HomePage);
 
     const [form, setForm] = useState({
       title: '',
@@ -50,6 +51,40 @@ const EditableContactPage = () => {
         setAlertOpen(true);
       });
     };
+
+    useEffect(() => {
+        dispatch(fetchHomePageDetailsAction())
+      }, [dispatch])
+
+      useEffect(() => {
+        if (homePage?.contactSection) {
+          const {
+            title = '',
+            bannertext = '',
+            description = '',
+            address = '',
+            phoneHelp = '',
+            emailHelp = '',
+            addressHelp = '',
+            phoneNumber = [''],
+            email = [''],
+          } = homePage.contactSection;
+      
+          setForm({
+            title,
+            bannertext,
+            description,
+            address,
+            phoneHelp,
+            emailHelp,
+            addressHelp,
+            phoneNumber: phoneNumber.length ? phoneNumber : [''],
+            email: email.length ? email : [''],
+          });
+        }
+      }, [homePage]);
+      
+
   return (
     <>
     <CustomSnackbar

@@ -13,6 +13,8 @@ import navConfig from './config-navigation';
 
 import NavToggleButton from './NavToggleButton';
 import FinancialAdvisors from './config-navigationFinancialAdvisors';
+import logo from '../../../assets/img/logo-icon.svg';
+
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +46,8 @@ export default function NavMini() {
           ...hideScrollbarX,
         }}
       >
-        <Logo sx={{ mx: 'auto', my: 2 }} />
+         <img src={logo} alt="Logo" height="50px" className="logo" style={{ margin: '0 auto', marginTop: '0.5rem', marginBottom: '0.5rem',cursor:'pointer' }} />
+        {/* <Logo sx={{ mx: 'auto', my: 2 }} /> */}
 
               <NavSectionMini data={ FinancialAdviserid !== 'FinancialAdviser'  ?  navConfig : FinancialAdvisors } />
 

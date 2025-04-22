@@ -57,7 +57,7 @@ export const PATH_DASHBOARD = {
 export const LANDING_PAGE = {
   root: ROOTS_LANDING_PAGE,
   user: {
-    root: path(ROOTS_LANDING_PAGE, '/home'),
+    root: path(ROOTS_LANDING_PAGE, '/'),
     Home: path(ROOTS_LANDING_PAGE, '/home'),
     About: path(ROOTS_LANDING_PAGE, '/about'),
     Services: path(ROOTS_LANDING_PAGE, '/services'),

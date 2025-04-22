@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GridDeleteForeverIcon } from '@mui/x-data-grid';
 import { Box, Button, TextField, Typography, Chip, IconButton } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { setAboutPageDetailsAction, setFacilitiesDetailsAction } from '../redux/HomePage/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHomePageDetailsAction, setAboutPageDetailsAction, setFacilitiesDetailsAction } from '../redux/HomePage/action';
 import CustomSnackbar from './CustomSnackbar';
 
 const EditableAboutPage = () => {
@@ -11,6 +11,11 @@ const EditableAboutPage = () => {
   const [fileNames, setFileNames] = useState({});
   const [timingValue, setTimingValue] = useState('');
   const [timingList, setTimingList] = useState([]);
+  const [bannerText, setBannerText] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const { homePage } = useSelector((state) => state.HomePage);
 
   const handleFileChange = (e) => {
     const { name } = e.target;
@@ -31,18 +36,37 @@ const EditableAboutPage = () => {
     setTimingList(timingList.filter((_, i) => i !== index));
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setAlertOpen(false);
+  //   const formData = new FormData(e.target);
+
+  //   timingList.forEach((time) => formData.append('Timing[]', time));
+
+  //   setAboutPageDetailsAction(formData, dispatch).then(() => {
+  //     setAlertOpen(true);
+  //   });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setAlertOpen(false);
-    const formData = new FormData(e.target);
-
+    const formData = new FormData();
+  
+    formData.append('bannertext', bannerText);
+    formData.append('title', title);
+    formData.append('description', description);
+    if (e.target.bigImage?.files[0]) formData.append('bigImage', e.target.bigImage.files[0]);
+    if (e.target.smallImage?.files[0]) formData.append('smallImage', e.target.smallImage.files[0]);
+    if (e.target.bannerImage?.files[0]) formData.append('bannerImage', e.target.bannerImage.files[0]);
+  
     timingList.forEach((time) => formData.append('Timing[]', time));
-
+  
     setAboutPageDetailsAction(formData, dispatch).then(() => {
       setAlertOpen(true);
     });
   };
-
+  
   const [facilities, setFacilities] = useState([
     { titles: '', descriptions: '', links: '', iconFile: null, iconFileName: '' },
   ]);
@@ -89,6 +113,37 @@ const EditableAboutPage = () => {
       setAlertOpen(true);
     });
   };
+
+  useEffect(() => {
+    dispatch(fetchHomePageDetailsAction())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (homePage?.aboutSection) {
+      setBannerText(homePage.aboutSection.bannertext || '');
+      setTitle(homePage.aboutSection.title || '');
+      setDescription(homePage.aboutSection.description || '');
+      setTimingList(homePage.aboutSection.Timing || []);
+      setFileNames({
+        bigImage: homePage.aboutSection.bigImageUrl?.split('/').pop(),
+        smallImage: homePage.aboutSection.smallImageUrl?.split('/').pop(),
+        bannerImage: homePage.aboutSection.bannerUrl?.split('/').pop(),
+      });
+    }
+
+    if (homePage?.facilities?.length) {
+      setFacilities(
+        homePage.facilities.map((fac) => ({
+          titles: fac.title || '',
+          descriptions: fac.description || '',
+          links: fac.link || '',
+          iconFile: null,
+          iconFileName: fac.iconUrl?.split('/').pop() || '',
+        }))
+      );
+    }
+  }, [homePage]);
+
   return (
     <>
       <CustomSnackbar
@@ -122,14 +177,19 @@ const EditableAboutPage = () => {
           placeholder="Enter banner text"
           fullWidth
           required
+          value={bannerText}
+          onChange={(e) => setBannerText(e.target.value)}
         />
 
-        <TextField label="Title" name="title" placeholder="Enter title" fullWidth required />
+        <TextField label="Title" name="title" placeholder="Enter title" value={title}
+          onChange={(e) => setTitle(e.target.value)} fullWidth required />
 
         <TextField
           label="Description"
           name="description"
           placeholder="Enter description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           fullWidth
           multiline
           rows={3}

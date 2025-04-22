@@ -39,7 +39,6 @@ export default function ThemeProvider({ children }) {
   );
 
   const theme = createTheme(themeOptions);
-  console.log("theme",theme)
 
   theme.components = componentsOverride(theme);
   return (

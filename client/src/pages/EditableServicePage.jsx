@@ -1,79 +1,104 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GridDeleteForeverIcon } from '@mui/x-data-grid';
 import { Box, TextField, Button, Typography, Stack, IconButton } from '@mui/material';
 // import AddIcon from '@mui/icons-material/Add';
 // import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch } from 'react-redux';
-import { setServicePageDetailsAction } from '../redux/HomePage/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHomePageDetailsAction, setServicePageDetailsAction } from '../redux/HomePage/action';
 import CustomSnackbar from './CustomSnackbar';
 
 
 const EditableServicePage = () => {
 
-    const dispatch = useDispatch()
-      const [alertOpen, setAlertOpen] = useState(false);
-    
-    const [services, setServices] = useState([
-        { titles: '', descriptions: '', imageUrl: '', links: '' },
-      ]);
-    
-      const handleServiceChange = (index, e) => {
-        const { name, value } = e.target;
-        const updatedServices = [...services];
-        updatedServices[index][name] = value;
-        setServices(updatedServices);
-      };
-      const addService = () => {
-        setServices([...services, { titles: '', descriptions: '', imageUrl: '', links: '' }]);
-      };
-    
-      const removeService = (index) => {
-        const updatedServices = services.filter((_, i) => i !== index);
-        setServices(updatedServices);
-      };
-    
-      const [fileName, setFileName] = useState('');
-      const [serviceImg, setServiceImg]= useState('')
-    
-      // const handleFileChange = (e) => {
-      //   const file = e.target.files[0];
-      //   if (file) setFileName(file.name);
-      // };
+  const dispatch = useDispatch()
+  const [alertOpen, setAlertOpen] = useState(false);
+  const { homePage } = useSelector((state) => state.HomePage);
+  const [bannerText, setBannerText] = useState('');
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
 
-      const handleFileChange2 = (e) => {
-        const file = e.target.files[0];
-        if (file) setServiceImg(file.name);
-      };
-    
-      const handleSubmit = async (e, service) => {
-        e.preventDefault();
-        setAlertOpen(false);
-        const formData = new FormData(e.target);
-        const data = {
-          title: formData.get('title'),
-          bannerText: formData.get('bannertext'),
-          description: formData.get('description'),
-          service,
-        };
-      
-        // const bannerImage = formData.get('bannerImage');
-        // if (bannerImage && bannerImage.name) {
-        //   data.bannerImage = bannerImage; // append only if image is uploaded
-        // }
-         setServicePageDetailsAction(formData, dispatch).then(() => {
-          setAlertOpen(true);
-        });
-        
-      };
+
+  const [services, setServices] = useState([
+    { titles: '', descriptions: '', imageUrl: '', links: '' },
+  ]);
+
+  const handleServiceChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedServices = [...services];
+    updatedServices[index][name] = value;
+    setServices(updatedServices);
+  };
+  const addService = () => {
+    setServices([...services, { titles: '', descriptions: '', imageUrl: '', links: '' }]);
+  };
+
+  const removeService = (index) => {
+    const updatedServices = services.filter((_, i) => i !== index);
+    setServices(updatedServices);
+  };
+
+  const [fileName, setFileName] = useState('');
+  const [serviceImg, setServiceImg] = useState('')
+
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) setFileName(file.name);
+  // };
+
+  const handleFileChange2 = (e) => {
+    const file = e.target.files[0];
+    if (file) setServiceImg(file.name);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setAlertOpen(false);
+  
+    const data = {
+      title,
+      bannerText,
+      description,
+      service: services,
+    };
+  
+    setServicePageDetailsAction(data, dispatch).then(() => {
+      setAlertOpen(true);
+    });
+  };
+  
+
+  useEffect(() => {
+    dispatch(fetchHomePageDetailsAction())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (homePage?.servicesSection) {
+      const section = homePage.servicesSection;
+
+      setBannerText(section.bannertext || '');
+      setTitle(section.title || '');
+      setDescription(section.description || '');
+
+      const mappedServices = (section.services || []).map((service) => ({
+        titles: service.title || '',
+        descriptions: service.description || '',
+        imageUrl: service.imageUrl || '',
+        links: service.link || '',
+      }));
+
+      setServices(mappedServices.length ? mappedServices : [{ titles: '', descriptions: '', imageUrl: '', links: '' }]);
+    }
+  }, [homePage]);
+
   return (
     <>
-    <CustomSnackbar
-            open={alertOpen}
-            message="Updated successfully!"
-            severity="success"
-            onClose={() => setAlertOpen(false)}
-          />
-     <Box
+      <CustomSnackbar
+        open={alertOpen}
+        message="Updated successfully!"
+        severity="success"
+        onClose={() => setAlertOpen(false)}
+      />
+      <Box
         component="form"
         onSubmit={(e) => handleSubmit(e, services)}
         sx={{
@@ -96,16 +121,21 @@ const EditableServicePage = () => {
           label="Banner Text"
           name="bannertext"
           placeholder="Enter banner text"
+          value={bannerText}
+          onChange={(e) => setBannerText(e.target.value)}
           fullWidth
           required
         />
 
-        <TextField label="Main Title" name="title" placeholder="Enter title" fullWidth required />
+        <TextField label="Main Title" name="title" placeholder="Enter title" value={title}
+          onChange={(e) => setTitle(e.target.value)} fullWidth required />
 
         <TextField
           label="Description"
           name="description"
           placeholder="Enter description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           multiline
           rows={3}
           fullWidth
@@ -145,15 +175,15 @@ const EditableServicePage = () => {
             borderRadius={1}
             width='100%'
           >
-             <IconButton
-                            onClick={() => removeService(index)}
-                            sx={{justifyContent:'end',width:'100%',":hover":{backgroundColor:'white  !important'}}}
-                            color="error"
-                            disabled={services.length === 1}
-                          >
+            <IconButton
+              onClick={() => removeService(index)}
+              sx={{ justifyContent: 'end', width: '100%', ":hover": { backgroundColor: 'white  !important' } }}
+              color="error"
+              disabled={services.length === 1}
+            >
 
-              <GridDeleteForeverIcon color='error'   />
-                          </IconButton>
+              <GridDeleteForeverIcon color='error' />
+            </IconButton>
             <TextField
               label="Service Title"
               name="titles"
@@ -170,7 +200,7 @@ const EditableServicePage = () => {
               fullWidth
               required
             />
-           {/* <TextField
+            {/* <TextField
               label="Image URL"
               name="imageUrl"
               value={service.imageUrl}
@@ -178,23 +208,23 @@ const EditableServicePage = () => {
               fullWidth
               required
             /> */}
-              <Box>
-          <Button variant="outlined" component="label">
-            Image URL
-            <input
-              type="file"
-              name="serviceImages"
-              hidden
-              accept="image/*"
-              onChange={handleFileChange2}
-            />
-          </Button>
-          {serviceImg && (
-            <Typography variant="body2" mt={1} color="text.secondary">
-              Selected file: <strong>{serviceImg}</strong>
-            </Typography>
-          )}
-        </Box>
+            <Box>
+              <Button variant="outlined" component="label">
+                Image URL
+                <input
+                  type="file"
+                  name="serviceImages"
+                  hidden
+                  accept="image/*"
+                  onChange={handleFileChange2}
+                />
+              </Button>
+              {serviceImg && (
+                <Typography variant="body2" mt={1} color="text.secondary">
+                  Selected file: <strong>{serviceImg}</strong>
+                </Typography>
+              )}
+            </Box>
             <TextField
               label="Link"
               name="links"
@@ -203,7 +233,7 @@ const EditableServicePage = () => {
               fullWidth
               required
             />
-        
+
           </Box>
         ))}
 
@@ -227,4 +257,3 @@ const EditableServicePage = () => {
 }
 
 export default EditableServicePage
- 

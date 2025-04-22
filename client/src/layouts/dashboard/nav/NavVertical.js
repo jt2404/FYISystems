@@ -18,6 +18,7 @@ import FinancialAdvisors from './config-navigationFinancialAdvisors';
 import NavDocs from './NavDocs';
 import NavAccount from './NavAccount';
 import NavToggleButton from './NavToggleButton';
+import logo from '../../../assets/img/logo-icon.svg';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +51,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
         },
       }}
     >
-      <Stack
+      {/* <Stack
         spacing={3}
         sx={{
           pt: 3,
@@ -58,11 +59,12 @@ export default function NavVertical({ openNav, onCloseNav }) {
           px: 2.5,
           flexShrink: 0,
         }}
-      >
-        <Logo />
+      > */}
+        {/* <Logo /> */}
+         <img src={logo} alt="Logo" height="50px" className="logo"  style={{ margin: '0 auto', marginTop: '0.5rem', marginBottom: '0.5rem',cursor:'pointer' }} />
 
         <NavAccount />
-      </Stack>
+      {/* </Stack> */}
 
 
   
@@ -70,7 +72,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <NavDocs />
+      {/* <NavDocs /> */}
     </Scrollbar>
   );
 

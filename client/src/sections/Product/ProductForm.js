@@ -62,15 +62,33 @@ const ProductForm = ({ handleClose, currentRow }) => {
 
   const { handleSubmit } = methods;
 
+  // const handleImageUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImages([...images, reader.result]);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImages([...images, reader.result]);
-      };
-      reader.readAsDataURL(file);
-    }
+    const files = Array.from(e.target.files);
+    const readers = files.map(
+      file =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        })
+    );
+    
+  
+    Promise.all(readers).then((results) => {
+      setImages(prev => [...prev, ...results]);
+    });
   };
 
   const deleteImage = (img, index) => {
@@ -99,6 +117,11 @@ const ProductForm = ({ handleClose, currentRow }) => {
     handleClose();
   };
 
+  useEffect(() => {
+    if (defaultValues.image) {
+      setImages(Array.isArray(defaultValues.image) ? defaultValues.image : [defaultValues.image]);
+    }
+  }, [defaultValues.image]);  
   return (
     <>
       <DialogAnimate
@@ -112,7 +135,7 @@ const ProductForm = ({ handleClose, currentRow }) => {
             <RHFSelect name="status" label="Status *" options={statuses} />
             <RHFSelect name="categories_id" label="Category *" options={categories} />
             <RHFTextField name="details" label="Details *" />
-            <input name="image" type="file" onChange={handleImageUpload} />
+            <input name="image" type="file" onChange={handleImageUpload} multiple />
 
             <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
               {images.map((img, index) => (

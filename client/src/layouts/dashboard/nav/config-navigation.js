@@ -20,7 +20,7 @@ const navConfig = [
   // GENERAL
   // ----------------------------------------------------------------------
   {
-    subheader: 'general v4.1.0',
+    subheader: '',
     items: [
       { title: 'dashboard', path: "", icon: ICONS.dashboard },
     ],
@@ -37,25 +37,25 @@ const navConfig = [
         path: PATH_DASHBOARD.user.root,
         icon: ICONS.user,
         children: [
+          { title: 'FinancialAdvisors', path: PATH_DASHBOARD.user.FinancialAdvisors },
+          { title: 'Appointments', path: PATH_DASHBOARD.user.Appointments },
           { title: 'Category', path: PATH_DASHBOARD.user.Category },
           { title: 'SubCategory', path: PATH_DASHBOARD.user.SubCategory },       
-          { title: 'Faq', path: PATH_DASHBOARD.user.Faq },
-          { title: 'Privacy', path: PATH_DASHBOARD.user.Privacy },
-          { title: 'Terms', path: PATH_DASHBOARD.user.Terms },
-          { title: 'User', path: PATH_DASHBOARD.user.User },
-          { title: 'FinancialAdvisors', path: PATH_DASHBOARD.user.FinancialAdvisors },
           { title: 'Products', path: PATH_DASHBOARD.user.Products },
-          { title: 'Appointmentsoduct', path: PATH_DASHBOARD.user.Appointments },
-          { title: 'FeedbackPage', path: PATH_DASHBOARD.user.FeedbackPage }
+          { title: 'Terms', path: PATH_DASHBOARD.user.Terms },
+          { title: 'Policy', path: PATH_DASHBOARD.user.Privacy },
+          { title: 'User', path: PATH_DASHBOARD.user.User },
+          // { title: 'Faq', path: PATH_DASHBOARD.user.Faq },
+          // { title: 'FeedbackPage', path: PATH_DASHBOARD.user.FeedbackPage }
         ],
       },
     ],
   },
   {
-    subheader: 'landing page',
+    subheader: 'Pages',
     items: [
       {
-        title: 'Landing page',
+        title: 'Pages',
         path: LANDING_PAGE.user.root,
         icon: ICONS.ecommerce,
         children: [
