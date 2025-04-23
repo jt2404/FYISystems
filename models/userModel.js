@@ -6,10 +6,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    profile: {
+      type: String,
+      default: "upload/v1698231234/DefaultProfile.png",
+    },
     email: {
       type: String,
       required: true,
       unique: true,
+    },
+    contact: {
+      type: String,
     },
     password: {
       type: String,
@@ -17,8 +24,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['Admin', 'FinancialAdviser', 'User'],
-      default: 'User',
+      enum: ["Admin", "FinancialAdviser", "User"],
+      default: "User",
     },
     seenNotifications: {
       type: Array,
@@ -28,7 +35,11 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    FinancialAdvisorid: { type: mongoose.Schema.Types.ObjectId, ref: 'FinancialAdvisor', default: null }, 
+    FinancialAdvisorid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "FinancialAdvisor",
+      default: null,
+    },
   },
   {
     timestamps: true,

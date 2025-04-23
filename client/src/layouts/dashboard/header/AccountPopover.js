@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
-import { Box, Divider, MenuItem, Stack, Typography } from '@mui/material';
+import { Box, Button, Divider, MenuItem, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 // routes
 // auth
@@ -21,7 +21,7 @@ const OPTIONS = [
   },
   {
     label: 'Profile',
-    linkTo: '/',
+    linkTo: '/profile',
   },
   {
     label: 'Settings',
@@ -35,6 +35,7 @@ export default function AccountPopover() {
   const navigate = useNavigate();
 
   const { user } = useAuthContext();
+  console.log(user);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,7 +52,7 @@ export default function AccountPopover() {
   const handleLogout = async () => {
     try {
       localStorage.clear();
-      navigate("/");
+      navigate('/');
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -66,7 +67,7 @@ export default function AccountPopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      {/* <IconButtonAnimate
         onClick={handleOpenPopover}
         sx={{
           p: 0,
@@ -82,12 +83,22 @@ export default function AccountPopover() {
             },
           }),
         }}
-      >
-        <CustomAvatar src={settinglogo} alt={user?.displayName} name={user?.displayName} />
-      </IconButtonAnimate>
+      > */}
 
-      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
-        <Box sx={{ my: 1.5, px: 2.5 }}>
+      <Button
+        onClick={handleOpenPopover}
+        sx={{ ':hover': { bgcolor: 'transparent' }, p: 0 }}
+        disableRipple
+      >
+        <img
+          style={{ width: 30, height: 30 }}
+          src={settinglogo}
+          alt={user?.displayName}
+          name={user?.displayName}
+        />
+      </Button>
+      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0, mt: 1 }}>
+        <Box sx={{ px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
             {user?.displayName}
           </Typography>

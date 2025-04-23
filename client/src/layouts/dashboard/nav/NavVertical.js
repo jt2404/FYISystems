@@ -29,7 +29,7 @@ NavVertical.propTypes = {
 
 export default function NavVertical({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
-  const FinancialAdviserid = useSelector((state) => state.Auth.role);  // 'FinancialAdviser',
+  const FinancialAdviserid = useSelector((state) => state.Auth.role); // 'FinancialAdviser',
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -60,15 +60,28 @@ export default function NavVertical({ openNav, onCloseNav }) {
           flexShrink: 0,
         }}
       > */}
-        {/* <Logo /> */}
-         <img src={logo} alt="Logo" height="50px" className="logo"  style={{ margin: '0 auto', marginTop: '0.5rem', marginBottom: '0.5rem',cursor:'pointer' }} />
+      {/* <Logo /> */}
+      <img
+        src={logo}
+        alt="Logo"
+        height="50px"
+        className="logo"
+        style={{
+          marginLeft: '2rem',
+          marginTop: '0.5rem',
+          marginBottom: '1.5rem',
+          cursor: 'pointer',
+          width: 100,
+          height: 100,
+        }}
+      />
 
-        <NavAccount />
+      <NavAccount />
       {/* </Stack> */}
 
-
-  
-      <NavSectionVertical data={ FinancialAdviserid !== 'FinancialAdviser'  ?  navConfig : FinancialAdvisors } />
+      <NavSectionVertical
+        data={FinancialAdviserid !== 'FinancialAdviser' ? navConfig : FinancialAdvisors}
+      />
 
       <Box sx={{ flexGrow: 1 }} />
 

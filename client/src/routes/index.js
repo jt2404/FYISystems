@@ -1,4 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import ProfilePage from '../pages/ProfilePage';
+
 // auth
 
 // layouts
@@ -12,7 +14,7 @@ import {
   SubCategoryPage,
   CategoryPage,
   RegisterPage,
-  FaqPage ,
+  FaqPage,
   PrivacyPage,
   TermsPage,
   UserPage,
@@ -27,11 +29,12 @@ import {
   GeneralAppPage,
   Services,
   Servicedetails,
-  FeedbackPage,AppointmentStatusChart,
+  FeedbackPage,
+  AppointmentStatusChart,
   EditableHomePage,
   EditableAboutPage,
   EditableContactPage,
-  EditableServicePage
+  EditableServicePage,
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -62,22 +65,22 @@ export default function Router() {
     {
       path: '/dashboard',
       element: (
-        <RoleBasedRoute roles={["Admin"]} >
+        <RoleBasedRoute roles={['Admin']}>
           <DashboardLayout />
         </RoleBasedRoute>
       ),
       children: [
         {
-          path:'',
-          element: <AppointmentStatusChart/>,
+          path: '',
+          element: <AppointmentStatusChart />,
           index: true,
         },
         {
           path: 'user',
           children: [
             {
-              path:'',
-              element: <AppointmentStatusChart/>,
+              path: '',
+              element: <AppointmentStatusChart />,
               index: true,
             },
             { path: 'app', element: <GeneralAppPage /> },
@@ -89,67 +92,79 @@ export default function Router() {
             { path: 'User', element: <UserPage /> },
             { path: 'FinancialAdvisors', element: <FinancialAdvisorsPage /> },
             { path: 'Products', element: <ProductsPage /> },
-            { path: 'FeedbackPage', element: <FeedbackPage /> },  
-            { path: 'Appointments', element: <AppointmentsPage /> }
+            { path: 'FeedbackPage', element: <FeedbackPage /> },
+            { path: 'Appointments', element: <AppointmentsPage /> },
           ],
         },
+      ],
+    },
+    {
+      path: '/profile',
+      element: (
+        <RoleBasedRoute roles={['Admin']}>
+          <DashboardLayout />
+        </RoleBasedRoute>
+      ),
+      children: [
+        // {
+        //   element: <Navigate to="/dashboard/user/SubCategory" replace />,
+        //   index: true,
+        // },
+        { path: '', element: <ProfilePage /> },
       ],
     },
     {
       path: '/landingPage',
       element: (
-        <RoleBasedRoute roles={["Admin"]} >
+        <RoleBasedRoute roles={['Admin']}>
           <DashboardLayout />
         </RoleBasedRoute>
       ),
-     
-      children: [
 
-            // {
-            //   element: <Navigate to="/dashboard/user/SubCategory" replace />,
-            //   index: true,
-            // },
-            { path: 'home', element: <EditableHomePage /> },
-            { path: 'about', element: <EditableAboutPage /> },
-            { path: 'services', element: <EditableServicePage /> },
-            { path: 'contactus', element: <EditableContactPage /> },
-        
+      children: [
+        // {
+        //   element: <Navigate to="/dashboard/user/SubCategory" replace />,
+        //   index: true,
+        // },
+        { path: 'home', element: <EditableHomePage /> },
+        { path: 'about', element: <EditableAboutPage /> },
+        { path: 'services', element: <EditableServicePage /> },
+        { path: 'contactus', element: <EditableContactPage /> },
       ],
     },
     {
       path: '/FinancialAdviserDashboard',
       element: (
-        <RoleBasedRoute roles={["FinancialAdviser"]} >
+        <RoleBasedRoute roles={['FinancialAdviser']}>
           <DashboardLayout />
         </RoleBasedRoute>
       ),
       children: [
-       
         {
           path: 'FinancialAdviser',
           children: [
             {
-              element: <Navigate to="/FinancialAdviserDashboard/FinancialAdviser/Appointments" replace />,
+              element: (
+                <Navigate to="/FinancialAdviserDashboard/FinancialAdviser/Appointments" replace />
+              ),
               index: true,
             },
-            { path: 'Appointments', element: <AppointmentsFinancialAdviserPage /> }
+            { path: 'Appointments', element: <AppointmentsFinancialAdviserPage /> },
           ],
         },
       ],
     },
 
-
-  
-      // Main Routes
-      {
-        children: [
-          { element: <HomePage />, index: true },
-          { path: 'about', element: <AboutPage /> },
-          { path: 'contact', element: <Contact /> },
-          { path: 'faqs', element: <FaqsPage /> },
-          { path: 'services', element: <Services /> },
-        ],
-      },
+    // Main Routes
+    {
+      children: [
+        { element: <HomePage />, index: true },
+        { path: 'about', element: <AboutPage /> },
+        { path: 'contact', element: <Contact /> },
+        { path: 'faqs', element: <FaqsPage /> },
+        { path: 'services', element: <Services /> },
+      ],
+    },
     {
       element: <CompactLayout />,
       children: [{ path: '404', element: <Page404 /> }],
