@@ -6,8 +6,7 @@ exports.updateUserProfile = async (req, res) => {
     const userId = req.params.id; // assuming JWT auth middleware sets req.user
     const { name, email, contact, role } = req.body;
     const profile = req.file ? `uploads/${req.file.filename}` : undefined;
-    console.log(contact);
-    const updateFields = { name, email, role, contact };
+    const updateFields = { name, email, role };
     if (contact) updateFields.contact = contact;
     if (profile) updateFields.profile = profile;
 

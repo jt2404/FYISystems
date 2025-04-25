@@ -7,6 +7,6 @@ export const fetchUsersData = (options = null) => ApiService.get(usersURL, optio
 
 export const addUserData = (data, options = null) => ApiService.post(usersURL, data, options);
 
-export const updateUserData = (id, data, options = null) => ApiService.put(`${usersURL}${id}`, data, options);
+export const updateUserData = (id, data, options = null) => ApiService.putWithFormData(`${usersURL}${id}`, data, options);
 
 export const deleteUserData = (id, options = null) => ApiService.Delete(`${usersURL}${id}`, options);

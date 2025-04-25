@@ -19,7 +19,7 @@ router.delete("/:id", authMiddleware.protect, userController.deleteUser);
 router.put(
   "/:id",
   authMiddleware.protect,
-  upload.single("profile"),
+  upload.single("profilePhoto"),
   userController.updateUserProfile
 );
 

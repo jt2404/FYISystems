@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Avatar, Stack } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthDetails } from '../redux/Auth/AuthProfile';
 import { updateUserData } from '../services/UsersService';
 import CustomSnackbar from './CustomSnackbar';
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.Auth?.payload?.data?.user);
-
-  console.log(user);
+const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -41,8 +41,12 @@ const ProfilePage = () => {
     formData.append('role', form.role);
     if (photo) formData.append('profilePhoto', photo);
 
-    updateUserData(user?._id, formData).then(() => {
+    updateUserData(user?._id, formData).then((res) => {
       setAlertOpen(true);
+  console.log(res);
+      
+      dispatch(AuthDetails(res));
+
     });
   };
 
@@ -78,7 +82,7 @@ const ProfilePage = () => {
         <Stack direction="row" alignItems="center" spacing={2}>
           <Avatar
             alt="Profile"
-            src={photo ? URL.createObjectURL(photo) : undefined}
+            src={photo ? URL.createObjectURL(photo) :  `http://localhost:5000/${user?.profile}` }
             sx={{ width: 64, height: 64 }}
           />
           <Button variant="outlined" component="label">
