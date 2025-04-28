@@ -1,6 +1,8 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -99,5 +101,47 @@ exports.updatePassword = async (req, res) => {
     );
   } catch (err) {
     return res.status(400).json({ message: 'Invalid or expired token', error: err.message });
+  }
+};
+
+exports.forgotPassword  = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Generate random 8 character password
+    const newPassword = crypto.randomBytes(4).toString('hex'); // 8 characters
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update user password
+    user.password = hashedPassword;
+    await user.save();
+
+    // Setup nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail', // or your email service
+      auth: {
+        user: 'jayhthakkar2404@gmail.com',
+        pass: 'nzeo apju niul fept', // use app password or env var
+      },
+    });
+
+    // Send email
+    await transporter.sendMail({
+      from: '"Minimal UI" <your-email@gmail.com>',
+      to: email,
+      subject: 'Password Reset',
+      html: `<h3>Your new password: ${newPassword}</h3><p>Thank You</p>`,
+    });
+
+    return res.status(200).json({ message: 'New password sent to your email.' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
