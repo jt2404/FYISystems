@@ -36,9 +36,9 @@ const dispatch = useDispatch();
       <TestimonialSection />
       <FunFactCounter />
       <VideoSection />
-      <Team />
+      {/* <Team /> */}
       <Strategic />
-      <Blog />
+      {/* <Blog /> */}
       <AboutContact />
       {/* <Contact /> */}
       <Footer />

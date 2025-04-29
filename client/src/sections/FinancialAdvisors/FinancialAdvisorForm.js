@@ -39,7 +39,6 @@ const FinancialAdvisorForm = ({ handleClose, currentRow }) => {
 
   const { handleSubmit } = methods;
 
-  console.log(userid.id)
 
   const onSubmit = (data) => {
     const advisorData = {

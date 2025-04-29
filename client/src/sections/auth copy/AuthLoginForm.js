@@ -83,7 +83,7 @@ export default function AuthLoginForm() {
       <Stack alignItems="flex-end" sx={{ my: 2 }}>
         <Link
           component={RouterLink}
-          to={PATH_AUTH.resetPassword}
+          href={PATH_AUTH.resetPassword}
           variant="body2"
           color="inherit"
           underline="always"

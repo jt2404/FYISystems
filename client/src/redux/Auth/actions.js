@@ -31,7 +31,7 @@ export const loginAction = (data, navigate) => (dispatch) => {
 export const registerAction = (data ,navigate) => (dispatch) => {
     RegisterIn(data)
       .then((res) => {
-        navigate("/login");
+        navigate("/admin/login");
       })
       .catch((error) => {
         console.log("error", error);

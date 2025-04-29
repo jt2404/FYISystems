@@ -22,7 +22,7 @@ const navConfig = [
   {
     subheader: '',
     items: [
-      { title: 'dashboard', path: "", icon: ICONS.dashboard },
+      { title: 'dashboard', path: "/dashboard", icon: ICONS.dashboard },
     ],
   },
 
@@ -44,7 +44,7 @@ const navConfig = [
           { title: 'Products', path: PATH_DASHBOARD.user.Products },
           { title: 'Terms', path: PATH_DASHBOARD.user.Terms },
           { title: 'Policy', path: PATH_DASHBOARD.user.Privacy },
-          { title: 'User', path: PATH_DASHBOARD.user.User },
+          // { title: 'User', path: PATH_DASHBOARD.user.User },
           // { title: 'Faq', path: PATH_DASHBOARD.user.Faq },
           // { title: 'FeedbackPage', path: PATH_DASHBOARD.user.FeedbackPage }
         ],

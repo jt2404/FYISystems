@@ -47,8 +47,8 @@ const About = () => {
 
               {/* Get Started Button */}
               <Link to="about.html" className="common-btn">
-                <span>Get Started</span>
-                <span>
+                <span>Book Appointment</span>
+                {/* <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                     <g clipPath="url(#clip0_201_978353)">
                       <path
@@ -64,7 +64,7 @@ const About = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                </span>
+                </span> */}
               </Link>
             </div>
           </div>

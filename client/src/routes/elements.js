@@ -22,6 +22,7 @@ export const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
 export const SubCategoryPage = Loadable(lazy(() => import('../pages/SubCategoryPage')));
 export const CategoryPage = Loadable(lazy(() => import('../pages/CategoryPage')));
 export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
+export const ForgotPasswordPage = Loadable(lazy(() => import('../pages/ForgotPasswordPage')));
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
 export const FaqPage = Loadable(lazy(() => import('../pages/FaqPage')));
 export const PrivacyPage = Loadable(lazy(() => import('../pages/PrivacyPage')));

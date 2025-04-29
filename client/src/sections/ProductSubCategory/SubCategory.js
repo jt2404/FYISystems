@@ -101,7 +101,6 @@ const SubCategory = () => {
 
   const handleEditClick = (row) => (event) => {
     event.stopPropagation();
-    console.log(row)
     setCurrentRow(row);
     setIsModelOpen(true);
   };

@@ -56,7 +56,7 @@
 							"raw": "{\n\t\"email\": \"john@example.com\",\n\t\"password\": \"password123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/auth/login",
+							"raw": "http://localhost:5000/api/auth/admin/login",
 							"protocol": "http",
 							"host": [
 								"localhost"

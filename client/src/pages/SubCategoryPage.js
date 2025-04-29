@@ -11,7 +11,7 @@ export default function SubCategoryPage() {
   return (
     <>
       <Helmet>
-        <title> Page Four | Minimal UI</title>
+        <title> Page Four | The Prosperity Pioneers</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

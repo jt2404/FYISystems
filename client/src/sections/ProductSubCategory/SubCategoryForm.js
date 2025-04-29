@@ -50,7 +50,6 @@ const CategorySubForm = ({ handleClose, currentRow }) => {
   } = methods;
 
   const onSubmit = (data) => {
-    console.log("dddddd",data)
     const categoryData = {
       name: data.name,
       description: data.description,

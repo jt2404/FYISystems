@@ -116,8 +116,8 @@ const AboutContact = () => {
 
             <div className="ak-height-40 ak-height-lg-40"></div>
             <button type="submit" className="common-btn border-0">
-              <span> Get Started</span>
-              <span>
+              <span> Book Appointment</span>
+              {/* <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="15"
@@ -144,7 +144,7 @@ const AboutContact = () => {
                     </clipPath>
                   </defs>
                 </svg>
-              </span>
+              </span> */}
             </button>
           </form>
         </div>

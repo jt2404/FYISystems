@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
 // @mui
 import { Box } from '@mui/material';
 // hooks
@@ -12,12 +12,16 @@ import Header from './header';
 import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
+import { useAuthContext } from '../../auth/useAuthContext';
+
 
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
   const { themeLayout } = useSettingsContext();
+ const { isAuthenticated } = useAuthContext();
 
+  
   const isDesktop = useResponsive('up', 'lg');
 
   const [open, setOpen] = useState(false);
@@ -34,6 +38,11 @@ export default function DashboardLayout() {
     setOpen(false);
   };
 
+  // useEffect(()=>{
+    if (!isAuthenticated) {
+      return <Navigate to="/" />;
+    }
+  // },[isAuthenticated])
   const renderNavVertical = <NavVertical openNav={open} onCloseNav={handleClose} />;
 
   if (isNavHorizontal) {

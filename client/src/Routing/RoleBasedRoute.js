@@ -37,7 +37,7 @@ export default function RoleBasedRoute({ hasContent = true, roles, children }) {
   }
 
   if (currentRole === '') {
-    return navigate('/login');
+    return navigate('/admin/login');
   }
 
 

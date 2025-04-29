@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+require('dotenv').config();
 
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -125,8 +126,8 @@ exports.forgotPassword  = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail', // or your email service
       auth: {
-        user: 'jayhthakkar2404@gmail.com',
-        pass: 'nzeo apju niul fept', // use app password or env var
+        user:process.env.EMAIL_USER,
+        pass:  process.env.EMAIL_PASS, // use app password or env var
       },
     });
 

@@ -23,10 +23,10 @@ const OPTIONS = [
     label: 'Profile',
     linkTo: '/profile',
   },
-  {
-    label: 'Settings',
-    linkTo: '/',
-  },
+  // {
+  //   label: 'Settings',
+  //   linkTo: '/',
+  // },
 ];
 
 // ----------------------------------------------------------------------
@@ -35,7 +35,6 @@ export default function AccountPopover() {
   const navigate = useNavigate();
 
   const { user } = useAuthContext();
-  console.log(user);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -116,13 +115,16 @@ export default function AccountPopover() {
               {option.label}
             </MenuItem>
           ))}
+           <MenuItem onClick={handleLogout}>
+          Logout
+        </MenuItem>
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
+        {/* <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
-        </MenuItem>
+        </MenuItem> */}
       </MenuPopover>
     </>
   );

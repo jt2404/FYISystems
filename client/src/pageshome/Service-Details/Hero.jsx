@@ -20,7 +20,7 @@ const Hero = () => {
               Investment Planning & Management
             </h2>
           </div>
-          <p className="back-btn"><a href="/">Home</a> / Service Details</p>
+          {/* <p className="back-btn"><a href="/">Home</a> / Service Details</p> */}
         </div>
         <a href="" className="phone-number">(406) 555-0120</a>
       </div>

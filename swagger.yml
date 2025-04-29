@@ -44,7 +44,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/auth/login:
+  /api/auth/admin/login:
     post:
       tags:
         - Authentication

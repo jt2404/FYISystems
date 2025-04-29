@@ -21,7 +21,8 @@ const StyledRoot = styled('div')(({ theme }) => ({
 
 export default function NavAccount() {
   // const { user } = useAuthContext();
-  const user = useSelector((state) => state.Auth?.payload?.data?.user);
+  // const user = useSelector((state) => state.Auth?.payload?.data?.user);
+  const user = useSelector((state) => state.Auth.profile);
   return (
     <StyledRoot>
       <CustomAvatar src={user?.photoURL} alt={user?.name || 'TEST'} name={user?.name} />

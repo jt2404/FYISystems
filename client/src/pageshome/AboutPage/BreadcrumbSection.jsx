@@ -23,9 +23,9 @@ const BreadcrumbSection = () => {
 
             </h2>
           </div>
-          <a href="/home" className="back-btn">
+          {/* <a href="/home" className="back-btn">
             Home / About Us
-          </a>
+          </a> */}
         </div>
       </div>
     </section>

@@ -23,7 +23,7 @@ const Hero = () => {
 
           </h2>
         </div>
-        <p className="back-btn"><a href="/">Home</a> / Services</p>
+        {/* <p className="back-btn"><a href="/">Home</a> / Services</p> */}
       </div>
       <a href="" className="phone-number">            {homePage?.contactSection?.phoneNumber[0]}
       </a>

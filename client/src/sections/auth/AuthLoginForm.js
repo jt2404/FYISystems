@@ -14,6 +14,7 @@ import FormProvider, { RHFTextField } from '../../components/hook-form';
 import Iconify from '../../components/iconify';
 
 import { loginAction } from '../../redux/Auth/actions';
+import { PATH_AUTH } from '../../routes/paths';
 
 
 export default function AuthLoginForm() {
@@ -75,7 +76,7 @@ const {error}=useSelector((state) => state.Auth);
       </Stack>
 
       <Stack alignItems="flex-end" sx={{ my: 2 }}>
-        <Link variant="body2" color="inherit" underline="always">
+        <Link variant="body2" color="inherit" underline="always" href={PATH_AUTH.resetPassword} style={{ cursor: 'pointer' }}>
           Forgot password?
         </Link>
       </Stack>

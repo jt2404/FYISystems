@@ -205,7 +205,8 @@ const Footer = () => {
                     <li><Link to="contact.html">Contact Us</Link></li>
                     <li><Link to="team.html">Our Advisor</Link></li>
                     <li><Link to="pricing.html">Pricing</Link></li>
-                    <li><Link to="blog.html">Blog</Link></li>
+                    <li><Link to="blog.html">Terms & Condition</Link></li>
+                    <li><Link to="Privacy.html">Privacy</Link></li>
                   </ul>
                 </div>
                 <div className="link-content">
@@ -257,7 +258,7 @@ const Footer = () => {
       </div>
       <div className="copy-right">
         <p className="copyright-text">
-          Copyright 2024, All Rights Reserved. Made by Thememarch
+          Copyright 2025, All Rights Reserved. 
         </p>
       </div>
     </footer>

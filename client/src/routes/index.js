@@ -35,6 +35,7 @@ import {
   EditableAboutPage,
   EditableContactPage,
   EditableServicePage,
+  ForgotPasswordPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -45,7 +46,7 @@ export default function Router() {
       path: '/',
       children: [
         {
-          path: 'login',
+          path: 'admin/login',
           element: (
             <PublicRoutes>
               <LoginPage />
@@ -60,6 +61,14 @@ export default function Router() {
         //     </PublicRoutes>
         //   ),
         // },
+        {
+          path:'forgot-password',
+          element:(
+            <PublicRoutes>
+              <ForgotPasswordPage />
+            </PublicRoutes>
+          )
+        }
       ],
     },
     {

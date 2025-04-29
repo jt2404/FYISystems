@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // @mui
 import { Box, Stack, Drawer } from '@mui/material';
@@ -61,6 +61,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
         }}
       > */}
       {/* <Logo /> */}
+      <Link to="/" style={{ textDecoration: 'none' }}>
       <img
         src={logo}
         alt="Logo"
@@ -75,6 +76,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
           height: 100,
         }}
       />
+      </Link>
 
       <NavAccount />
       {/* </Stack> */}

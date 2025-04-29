@@ -19,8 +19,9 @@ export const PATH_DOCS = {
 
 
 export const PATH_AUTH = {
-  login: '/login',
-  register:"/register"
+  login: '/admin/login',
+  register:"/register",
+  resetPassword:'/forgot-password',
 };
 
 export const PATH_PAGE = {

@@ -5,7 +5,6 @@ const createFeedback = async (req, res) => {
   try {
     const { fullname, email, phone, description, appointmentDate } = req.body;
 
-    console.log(req.body)
 
     const newFeedback = new Feedback({ fullname, email, phone, description,appointmentDate });
     await newFeedback.save();
