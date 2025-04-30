@@ -24,9 +24,9 @@ const AboutContact = () => {
     }
   };
   return (
-    <>
+    <div id='contactform'>
     <div className="ak-height-125 ak-height-lg-80"></div>
-    <div className="container-fluid px-md-0">
+    <div className="container-fluid px-md-0" >
       <div className="contact-form-content">
         <div className="contact-form-img">
           <img src={IMG4} alt="Contact Image" />
@@ -150,7 +150,7 @@ const AboutContact = () => {
         </div>
       </div>
     </div>
-    </>
+    </div>
   )
 }
 
