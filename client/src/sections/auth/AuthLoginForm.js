@@ -46,7 +46,6 @@ const {error}=useSelector((state) => state.Auth);
   } = methods;
 
   const onSubmit = async (data) => {
-      console.log(data)
       dispatch(loginAction(data, navigate));
   
   }

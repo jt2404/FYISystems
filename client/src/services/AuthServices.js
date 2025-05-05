@@ -5,6 +5,6 @@ const postURL = `${API_URL}auth/`;
 
 export const RegisterIn = (data, options = null) => ApiService.post(`${postURL}signup`, data, options);
 
-export const LoginIn = (data, options = null) => ApiService.post(`${postURL}login`, data, options);
+export const LoginIn = (data, options = null) => ApiService.post(`${postURL}admin/login`, data, options);
 
 export const ForgotPasswordAPI = (data, options = null) => ApiService.post(`${postURL}forgot-password`, data, options);

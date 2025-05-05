@@ -12,14 +12,13 @@ import Header from './header';
 import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
-import { useAuthContext } from '../../auth/useAuthContext';
 
 
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
   const { themeLayout } = useSettingsContext();
- const { isAuthenticated } = useAuthContext();
+ 
 
   
   const isDesktop = useResponsive('up', 'lg');
@@ -38,11 +37,7 @@ export default function DashboardLayout() {
     setOpen(false);
   };
 
-  // useEffect(()=>{
-    if (!isAuthenticated) {
-      return <Navigate to="/" />;
-    }
-  // },[isAuthenticated])
+
   const renderNavVertical = <NavVertical openNav={open} onCloseNav={handleClose} />;
 
   if (isNavHorizontal) {
