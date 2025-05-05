@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -29,17 +30,16 @@ const useAuth = () => {
 export default function RoleBasedRoute({ hasContent = true, roles, children }) {
   const currentRole = useCurrentRole();
   const navigate = useNavigate();
-  const auth = useAuth();
 
-
-  if (!auth) {
-    return <LoadingScreen />;
-  }
+  useEffect(() => {
+    if (currentRole === '') {
+      navigate('/admin/login');
+    }
+  }, [currentRole, navigate]);
 
   if (currentRole === '') {
-    return navigate('/admin/login');
+    return null; // or a loader/spinner if redirect takes time
   }
-
 
   if (!roles?.includes(currentRole)) {
     return hasContent ? (

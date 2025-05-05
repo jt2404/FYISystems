@@ -16,29 +16,29 @@ const appointmentSchema = new mongoose.Schema(
     },
     productId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
+      ref: "Product",
     },
     financialAdvisorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:"FinancialAdvisor",
-      default: null
+      ref: "FinancialAdvisor",
+      default: null,
     },
     date: {
       type: String,
       required: false,
     },
     startTime: {
-        type: String, 
-        required: false,
-      },
-      endTime: {
-        type: String, 
-        required: false,
-      },
+      type: String,
+      required: false,
+    },
+    endTime: {
+      type: String,
+      required: false,
+    },
     status: {
       type: String,
-      enum: ['pending', 'completed', 'cancelled'],
-      default: 'pending',
+      enum: ["pending", "completed", "cancelled"],
+      default: "pending",
     },
   },
   {

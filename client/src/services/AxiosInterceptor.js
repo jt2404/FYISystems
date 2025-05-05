@@ -1,29 +1,28 @@
-import axios from "axios";
+import axios from 'axios';
 
-// const API_URL = "http://localhost:5000/api/";
-const API_URL = "http://3.128.53.252:3001/api/";
-
+const API_URL = 'http://localhost:5000/api/';
+// const API_URL = "http://3.128.53.252:3001/api/";
 
 const defaultOptions = {
-    baseURL: API_URL,
-    headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        "Accept": "*/*",
-    },
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    Accept: '*/*',
+  },
 };
 
 const axiosInstance = axios.create(defaultOptions);
 
 const requestHandler = (request) => {
-    request.headers["request-type"] = "web";
-    const token = localStorage.getItem("Token");
-    if (token) request.headers.Authorization = `Bearer ${token}`; 
-    return request;
+  request.headers['request-type'] = 'web';
+  const token = localStorage.getItem('Token');
+  if (token) request.headers.Authorization = `Bearer ${token}`;
+  return request;
 };
 
-const responseHandler = (response) => response.data; 
+const responseHandler = (response) => response.data;
 
 axiosInstance.interceptors.request.use((request) => requestHandler(request));
 

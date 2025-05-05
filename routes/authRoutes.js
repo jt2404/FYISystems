@@ -1,13 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authController = require('../controllers/authController');
-const sanitize = require('../config/sanitizer');
+const authController = require("../controllers/authController");
+const sanitize = require("../config/sanitizer");
 
-
-router.post('/signup',sanitize(),  authController.signup);
-router.post('/admin/login',sanitize(), authController.login);
-router.post('/generate-token', authController.generateTokenForUser);
-router.post('/update-password', authController.updatePassword);
-router.post('/forgot-password', authController.forgotPassword);
+router.post("/signup", sanitize(), authController.signup);
+router.post("/login", sanitize(), authController.login);
+router.post("/generate-token", authController.generateTokenForUser);
+router.post("/update-password", authController.updatePassword);
+router.post("/forgot-password", authController.forgotPassword);
 
 module.exports = router;

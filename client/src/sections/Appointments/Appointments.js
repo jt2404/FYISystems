@@ -8,22 +8,20 @@ import { fetchAppointments, deleteAppointment } from '../../redux/Appointments/a
 import ConfirmDialog from '../../components/animate/ConFirmDialog';
 import Calendar from '../Fullcalendar/Calendar';
 
-
-
 const initialValues = {
   _id: '',
   userName: '',
-  categories_title:"",
+  categories_title: '',
   product_id: '',
-  product_title:"",
+  product_title: '',
   financialAdvisor_id: '',
-  financialAdvisor_title:"",
+  financialAdvisor_title: '',
   date: '',
   startTime: '',
   endTime: '',
   status: '',
   createdAt: '',
-  updatedAt: ''
+  updatedAt: '',
 };
 
 const Appointments = () => {
@@ -48,7 +46,7 @@ const Appointments = () => {
   useEffect(() => {
     if (appointments && appointments.length > 0) {
       const formattedData = appointments.map((item, index) => ({
-         id: item._id,
+        id: item._id,
         _id: item._id,
 
         categories_title: item?.userId?.name,
@@ -58,7 +56,7 @@ const Appointments = () => {
         user_name: item?.userName,
         product_id: item?.productId?._id,
         financialAdvisor_id: item?.financialAdvisorId?._id,
-        email:item?.email,
+        email: item?.email,
         phone: item?.phone,
         date: item.date,
         startTime: item.startTime,
@@ -68,17 +66,16 @@ const Appointments = () => {
         updatedAt: item.updatedAt,
       }));
 
-      
-    const events = appointments?.map((item) => ({
-          id: item.id,
-          title: `${item?.financialAdvisorId?.firstName} ${item?.productId?.name}`,
-          start: `${item.date}T${item.startTime}:00`,
-          end: `${item.date}T${item.endTime}:00`,
-          color: "#1452",  
-          textColor: 'white'        
-    }));
-      
-      setEventsData(events)
+      const events = appointments?.map((item) => ({
+        id: item.id,
+        title: `${item?.financialAdvisorId?.firstName} ${item?.productId?.name}`,
+        start: `${item.date}T${item.startTime}:00`,
+        end: `${item.date}T${item.endTime}:00`,
+        color: '#1452',
+        textColor: 'white',
+      }));
+
+      setEventsData(events);
 
       setAppointmentData(formattedData);
     }
@@ -99,12 +96,42 @@ const Appointments = () => {
     { field: 'phone', headerName: 'Phone', width: 200 },
     { field: 'product_title', headerName: 'Product Name', width: 200 },
     { field: 'financialAdvisor_title', headerName: 'Financial Advisor', width: 200 },
-    { field: 'date', headerName: 'Date', width: 150 },
+    {
+      field: 'date',
+      headerName: 'Date',
+      width: 150,
+      valueFormatter: (params) => {
+        const date = new Date(params);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}/${date.getFullYear()}`;
+      },
+    },
     { field: 'startTime', headerName: 'Start Time', width: 150 },
     { field: 'endTime', headerName: 'End Time', width: 150 },
     { field: 'status', headerName: 'Status', width: 100 },
-    { field: 'createdAt', headerName: 'Created At', width: 200 },
-    { field: 'updatedAt', headerName: 'Updated At', width: 200 },
+    {
+      field: 'createdAt',
+      headerName: 'Created At',
+      width: 200,
+      valueFormatter: (params) => {
+        const date = new Date(params);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}/${date.getFullYear()}`;
+      },
+    },
+    {
+      field: 'updatedAt',
+      headerName: 'Updated At',
+      width: 200,
+      valueFormatter: (params) => {
+        const date = new Date(params);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}/${date.getFullYear()}`;
+      },
+    },
     {
       field: 'action',
       headerName: 'Action',
@@ -149,14 +176,18 @@ const Appointments = () => {
       </Box>
       <div className="main-table">
         {appointmentData.length > 0 && (
-          <DataGridBasic data={appointmentData} columns={AppointmentColumn} getRowId={(row) => row.id} />
+          <DataGridBasic
+            data={appointmentData}
+            columns={AppointmentColumn}
+            getRowId={(row) => row.id}
+          />
         )}
       </div>
       {isModelOpen && <AppointmentForm handleClose={handleClose} currentRow={currentRow} />}
       {confirmDialog && (
         <ConfirmDialog confirmDialog={confirmDialog} setConfirmDialog={setConfirmDialog} />
       )}
-     <Calendar events={eventsData}/>
+      <Calendar events={eventsData} />
     </>
   );
 };

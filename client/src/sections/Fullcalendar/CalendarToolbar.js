@@ -21,7 +21,6 @@ const RootStyle = styled('div')(({ theme }) => ({
   },
 }));
 
-
 CalendarToolbar.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   onToday: PropTypes.func,
@@ -31,42 +30,48 @@ CalendarToolbar.propTypes = {
   view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek']),
 };
 
-export default function CalendarToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }) {
-
+export default function CalendarToolbar({
+  date,
+  view,
+  onToday,
+  onNextDate,
+  onPrevDate,
+  onChangeView,
+}) {
   return (
     <RootStyle>
-        <Stack direction="row" spacing={0.5}>
-          {VIEW_OPTIONS.map((viewOption) => (
-            <Tooltip key={viewOption.value} title={viewOption.label}>
-              <ToggleButton
-                value={view}
-                selected={viewOption.value === view}
-                onChange={() => onChangeView(viewOption.value)}
-                sx={{ width: 32, height: 32, padding: 0, border: 0 }}
-              >
-                <Iconify icon={viewOption.icon} width={20} height={20} />
-              </ToggleButton>
-            </Tooltip>
-          ))}
-        </Stack>
-      
+      <Stack direction="row" spacing={0.5}>
+        {VIEW_OPTIONS.map((viewOption) => (
+          <Tooltip key={viewOption.value} title={viewOption.label}>
+            <ToggleButton
+              value={view}
+              selected={viewOption.value === view}
+              onChange={() => onChangeView(viewOption.value)}
+              sx={{ width: 32, height: 32, padding: 0, border: 0 }}
+            >
+              <Iconify icon={viewOption.icon} width={20} height={20} />
+            </ToggleButton>
+          </Tooltip>
+        ))}
+      </Stack>
 
       <Stack direction="row" alignItems="center" spacing={2}>
         <IconButton onClick={onPrevDate}>
           <Iconify icon="eva:arrow-ios-back-fill" width={20} height={20} />
         </IconButton>
 
-        <Typography variant="h5">{JSON.stringify(date)}</Typography>
+        <Typography variant="h5">{`${new Date(date).getDate()}/${
+          new Date(date).getMonth() + 1
+        }/${new Date(date).getFullYear()}`}</Typography>
 
         <IconButton onClick={onNextDate}>
           <Iconify icon="eva:arrow-ios-forward-fill" width={20} height={20} />
         </IconButton>
       </Stack>
 
-        <Button size="small" color="error" variant="contained" onClick={onToday}>
-          Today
-        </Button>
-    
+      <Button size="small" color="error" variant="contained" onClick={onToday}>
+        Today
+      </Button>
     </RootStyle>
   );
 }

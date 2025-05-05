@@ -13,14 +13,11 @@ import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
 
-
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
   const { themeLayout } = useSettingsContext();
- 
 
-  
   const isDesktop = useResponsive('up', 'lg');
 
   const [open, setOpen] = useState(false);
@@ -36,7 +33,6 @@ export default function DashboardLayout() {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   const renderNavVertical = <NavVertical openNav={open} onCloseNav={handleClose} />;
 
