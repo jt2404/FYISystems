@@ -85,7 +85,7 @@ const ProfilePage = () => {
         <Stack direction="row" alignItems="center" spacing={2}>
           <Avatar
             alt="Profile"
-            src={photo ? URL.createObjectURL(photo) :  `http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${user?.profile}` }
+            src={photo ? URL.createObjectURL(photo) :  `http://3.128.53.252:3001${user?.profile}` }
             sx={{ width: 64, height: 64 }}
           />
           <Button variant="outlined" component="label">

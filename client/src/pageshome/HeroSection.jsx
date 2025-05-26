@@ -16,7 +16,7 @@ const HeroSection = () => {
           <div className="swiper-slide" key={index}>
             <div className="ak-hero ak-style1 slide-inner" data-swiper-parallax="100%">
               <div className="ak-hero-featured" data-src={image}>
-                <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${homePage?.heroSection?.bannerUrl}`} className="ak-hero-bg" alt="Hero Background" />
+                <img src={`http://3.128.53.252:3001${homePage?.heroSection?.bannerUrl}`} className="ak-hero-bg" alt="Hero Background" />
               </div>
               <div className="container-md">
                 <div className="hero-slider-info">

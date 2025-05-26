@@ -68,9 +68,9 @@ const ServicesSection = () => {
                 <SwiperSlide key={index}>
                   <div className="service-card h-100">
                     <Link to="service-details.html" className="service-thumb">
-                      <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${service.imageUrl}`} alt="service" />
+                      <img src={`http://3.128.53.252:3001${service.imageUrl}`} alt="service" />
                       <div className="overlay-image">
-                        <img src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${service.imageUrl}`} alt="service" />
+                        <img src={`http://3.128.53.252:3001${service.imageUrl}`} alt="service" />
                       </div>
                     </Link>
                     <div className="service-info">

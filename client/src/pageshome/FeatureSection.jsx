@@ -40,7 +40,7 @@ const FeatureSection = () => {
         {features.map((feature, index) => (
           <React.Fragment key={index}>
             <div className="feature-card">
-              <img className="feature-icon" src={`http://ec2-3-128-53-252.us-east-2.compute.amazonaws.com/${feature.iconUrl}`} alt="Feature Icon" />
+              <img className="feature-icon" src={`http://3.128.53.252:3001${feature.iconUrl}`} alt="Feature Icon" />
               <div className="feature-body">
                 <h5 className="feature-title">{feature.title}</h5>
                 <p className="feature-desp">{feature.description}</p>
