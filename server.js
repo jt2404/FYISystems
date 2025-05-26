@@ -19,7 +19,9 @@ app.use(bodyParser.urlencoded({ limit: '1000mb', extended: true }));
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(cors()); 
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+
+
+app.use('/uploads', express.static(path.join(__dirname,'middlewares/uploads')));
 
 app.use((req, res, next) => {
     res.handler = new ResponseHandler(req, res);
